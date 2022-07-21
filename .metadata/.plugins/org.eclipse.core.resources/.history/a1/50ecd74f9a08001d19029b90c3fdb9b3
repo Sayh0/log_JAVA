@@ -1,0 +1,6 @@
+package test;
+
+public class hi {
+	???? 기억안나 시발
+	system.out.println("hi!");
+}

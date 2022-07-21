@@ -1,0 +1,10 @@
+package test.main;
+
+public class MyClass {
+	public static void main(String[] args) { 
+		// 자바스크립트에서 function main(args){} 정도?
+		// 아 그리고 자바에서는 함수는 이제부터 method다 아쎼이!
+		// 메인메소드가 자바에서 대장이다. Run 누르면 이놈부터 실행됨.
+		System.out.println("hello world!");
+	}
+}

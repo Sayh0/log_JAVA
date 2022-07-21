@@ -1,0 +1,12 @@
+package test.main; //패키지 파일명과 패키지 명시부는 일치해야한다.
+
+public class MainClass { //자바 파일명과 클래스 명 또한 일치해야한다.
+	public static void main(String[] args) {
+		System.out.println("main 메소드가 시작되었습니다.");
+		int num1 = 10; // 자바는 let 같은 편한 거 못 쓴다 아쎄이.
+		//int는 정수. 
+		//int num2=10.11 << 에러.
+		double num2=10.26326536;
+		//double이 실수타입.
+	}
+}
