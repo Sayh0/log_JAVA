@@ -8,7 +8,8 @@ package test.main;
  * -single quotation(작은따옴표)로 작성
  */
 public class MainClass04 {
-		char ch0='라';
+		public char ch0='라'; //여긴 필드Field다.
+		// 클래스 개념을 배우고 나니까 이제 왜 그냥 여기다 char ch0='라'로는 변수생성이 안되는거 알았음.
 	public static void main(String[] args) {
 		System.out.println("main method started.");
 		char ch1='a';
@@ -27,6 +28,10 @@ public class MainClass04 {
 		int code4=ch4; //44032
 		int code5=ch5; //45208
 		int code6=ch6; //45796
+		MainClass04 test=new MainClass04(); //이래야 생성됨.
+		char ch8=test.ch0;
+		int code7=ch8;
+		
 		System.out.println(code6); //45796 출력
 	
 	/*
