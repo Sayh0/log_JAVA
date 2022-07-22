@@ -15,6 +15,7 @@ public class MainClass05 {
 		
 		//int result =10+num1; << 에러. num1은 생성되어 있지 않은 상태.
 		//차라리 int num1=10; 처럼 선언과 동시에 초기화하면 모를까.
+		//미리 만들어놓고 싶으면 보통 int에 0, String에 null 넣던가 해서 해 둠.
 		
 		System.out.println("main method terminated.");
 	}

@@ -8,6 +8,7 @@ package test.main;
  * -single quotation(작은따옴표)로 작성
  */
 public class MainClass04 {
+		char ch0='라';
 	public static void main(String[] args) {
 		System.out.println("main method started.");
 		char ch1='a';
@@ -19,6 +20,7 @@ public class MainClass04 {
 		char ch7='@';
 		
 		//정수값에 1:1 대응하는 char 값이 존재한다.
+		
 		int code1=ch1; //97
 		int code2=ch2; //98
 		int code3=ch3; //99

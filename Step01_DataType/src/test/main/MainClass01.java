@@ -2,6 +2,7 @@
 package test.main;
 
 public class MainClass01 {
+	int global=666;
 	public static void main(String[] args) {
 		/*
 		 *  [ Java 기본 데이터 type ]
