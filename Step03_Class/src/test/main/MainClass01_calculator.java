@@ -2,7 +2,7 @@ package test.main;
 
 import test.mypac.Calculator; //1. 다른 패키지에 있는 클래스를 사용을 위해 끌어오자. 
 
-public class MainClass01 {
+public class MainClass01_calculator {
 	public static void main(String[] args) {
 		/*
 		 * 만일 프로그래밍의 목적이 '계산'이라면?
