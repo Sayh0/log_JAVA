@@ -2,7 +2,7 @@ package test.mypac;
 
 public class Calculator {
 	//필드를 만들어보자.
-	//(참고)자바엔 전역변수 개념이 없다!!! 전역변수 비스~~무리한게 있지만 전역변수는 없 다!
+	//(참고)자바엔 전역변수 개념이 없다. 전역변수 비스~~무리한게 있지만(static) 전역변수는 없 다!
 	public String brand="xiaomi";
 	
 	
