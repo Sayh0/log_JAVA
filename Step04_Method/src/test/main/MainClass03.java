@@ -8,12 +8,12 @@ public class MainClass03 {
 		JFrame f=new JFrame();
 		f.setSize(300, 400);
 		f.setTitle("타이틀입니다.");
-		f.setLayout(new BorderLayout());
+		//f.setLayout(new BorderLayout());
 		
 		JButton btn = new JButton();
 		btn.setText("push me");
 		
-		f.add(btn, BorderLayout.NORTH);
+		//f.add(btn, BorderLayout.NORTH);
 		
 		f.setVisible(true);
 

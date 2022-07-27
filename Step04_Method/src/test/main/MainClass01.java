@@ -12,7 +12,7 @@ public class MainClass01 {
 		 */  
 		MyObject myObj=new MyObject();
 		
-	    myObj.walk();
+	    myObj.walk(); // 호출하고 담는 값이 없으면 그냥 날아감.
 	    
 	    int num=myObj.getNumber();
 	    

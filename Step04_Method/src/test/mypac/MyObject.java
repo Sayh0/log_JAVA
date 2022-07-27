@@ -33,4 +33,22 @@ public class MyObject {
 		//여기서는 new 가 된다? 된다! 패키지mypac 같으니까.
 		//리턴타입이 Car임. Car의 기능을 끌어 쓸 수 있게 메소드화.
 	}
+	//int type을 메소드의 인자로 전달받는 메소드
+	public void setNum(int num) {
+		System.out.println("num : "+num);
+	}
+	//String type을 메소드의 인자로 전달받는 메소드
+	public void setName(String name) {
+		System.out.println("name : "+name);
+	}
+
+	//Radio 라는 타입을 메소드의 인자로 전달받는 메소드
+	public void useRadio(Radio r) {
+		r.listenMusic();
+	}
+	
+	//Gun type과 Arrow type을 메소드의 인자로 전달받는 메소드
+	public void attack(Gun g, Arrow a) {
+		System.out.println("총과 칼로 공격하기");
+	}
 }
