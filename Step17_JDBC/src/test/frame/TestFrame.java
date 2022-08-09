@@ -3,6 +3,7 @@ package test.frame;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,6 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import test.dao.MemberDao;
+import test.dto.MemberDto;
 /*
  *  //1. 선택된 row  인덱스를 읽어온다.
    int selectedIndex=table.getSelectedRow();
@@ -31,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
    }
  * 
  */
-public class TestFrame extends JFrame{
+public class TestFrame extends JFrame implements ActionListener{
    //필드
    JTextField inputName, inputAddr;
    DefaultTableModel model;
@@ -49,14 +53,17 @@ public class TestFrame extends JFrame{
       
       JButton saveBtn=new JButton("저장");
       saveBtn.setActionCommand("save");
-      saveBtn.addActionListener(null);
-
+      saveBtn.addActionListener(this);
+      
       //삭제 버튼 추가
       JButton deleteBtn=new JButton("삭제");
       deleteBtn.setActionCommand("delete");
-      deleteBtn.addActionListener(null);
-
-
+      deleteBtn.addActionListener(this);
+      
+      //수정 버튼 추가
+      JButton updateBtn=new JButton("수정");
+      updateBtn.setActionCommand("update");
+      updateBtn.addActionListener(this);
       
       JPanel panel=new JPanel();
       panel.add(label1);
@@ -65,6 +72,8 @@ public class TestFrame extends JFrame{
       panel.add(inputAddr);
       panel.add(saveBtn);
       panel.add(deleteBtn);
+      panel.add(updateBtn);
+
       
       add(panel, BorderLayout.NORTH);
       
@@ -81,10 +90,25 @@ public class TestFrame extends JFrame{
       //JScrollPane  을 프레임의 가운데에 배치하기 
       add(scroll, BorderLayout.CENTER);
       
-      displayMember();
+      displayMemberInit();
       
-      deleteBtn.addActionListener(null);
    }
+   //table 초기화 메소드
+   public void displayMemberInit() {
+	      model.setRowCount(0);
+	      MemberDao dao = new MemberDao();
+	      List<MemberDto> list = dao.getListAll();
+	      for(MemberDto member:list) {
+	         Object[] row = {member.getNum(), member.getName(), member.getAddr()};
+	         model.addRow(row);
+	      }
+//	      for(int i=0; i<list.size(); i++) {
+//	    	  MemberDto tmp=list.get(i);
+//	    	  Object[] row= {tmp.getNum(), tmp.getName(), tmp.getAddr()};
+//	    	  model.addRow(row);
+//	      }
+
+	   }
    
    //테이블에 데이터 출력하는 메소드
    public void displayMember() {
@@ -102,7 +126,8 @@ public class TestFrame extends JFrame{
       
    }
 
-	   
+   
+   
    //main  메소드
    public static void main(String[] args) {
       TestFrame f=new TestFrame();
@@ -110,17 +135,87 @@ public class TestFrame extends JFrame{
       f.setBounds(100, 100, 800, 500);
       f.setVisible(true);
    }
-   
-   @Override
-   public void actionPerformed(ActionEvent e) {
-	   String actCmd = e.getActionCommand();
-	   
-	   if(actCmd.equals("save")) {
-		   System.out.println("1qjs");
-	   } else if (actCmd.equals("delete")) {
-		   System.out.println("2qjs");
-	   }
-   }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String actCmd=e.getActionCommand();
+		
+		MemberDto mdto=null;
+		MemberDao mdao=new MemberDao();
+		String name=inputName.getText();
+		String addr=inputAddr.getText();
+		
+		if(actCmd.equals("save")) {
+			System.out.println("save initiated");
+			if(name.equals("") || addr.equals("") || name.equals(" ") || addr.equals(" ")) {
+				System.out.println("wrong input");
+	            JOptionPane.showMessageDialog(null, "input username please!", 
+	            		"input userName", 
+	            		JOptionPane.WARNING_MESSAGE);
+			}
+			mdto=new MemberDto();
+			mdto.setName(name);
+			mdto.setAddr(addr);
+			
+			boolean isSuccess=mdao.insert(mdto);
+			if (isSuccess) {
+				System.out.println("save succeeded.");
+				model.setRowCount(0); //테이블 카운트 초기화
+				
+				displayMemberInit();
+				
+			} else {
+				System.out.println("save failed.");
+	            JOptionPane.showMessageDialog(null, "save failed!", 
+	            		"Error", 
+	            		JOptionPane.WARNING_MESSAGE);
+			}
+			
+		} else if (actCmd.equals("delete")) {
+			try {
+				System.out.println("delete initiated");
+				int selectedNum=table.getSelectedRow(); //row 선택
+				int num=(int) model.getValueAt(selectedNum, 0);
+				boolean isSuccess=mdao.delete(num);
+				if(isSuccess) {
+					model.setRowCount(0); //테이블 초기화
+					displayMemberInit();
+
+				} else {
+					System.out.println("delete failed.");
+		            JOptionPane.showMessageDialog(null, "delete failed!", 
+		            		"Error", 
+		            		JOptionPane.WARNING_MESSAGE);
+				}
+			} catch(Exception delexception) {
+				
+			}
+		} else {
+			System.out.println("update initiated");
+			int selectedNum=table.getSelectedRow(); //row 선택
+			int num=(int) model.getValueAt(selectedNum, 0);
+
+			if(name.equals("") || addr.equals("") || name.equals(" ") || addr.equals(" ")) {
+				System.out.println("wrong input");
+	            JOptionPane.showMessageDialog(null, "input username please!", 
+	            		"Error", 
+	            		JOptionPane.WARNING_MESSAGE);
+			}
+			mdto=new MemberDto(num, name, addr);
+			boolean isSuccess=mdao.update(mdto);
+
+			if(isSuccess) {
+				model.setRowCount(0);
+				displayMemberInit();
+
+			} else {
+				System.out.println("update failed.");
+	            JOptionPane.showMessageDialog(null, "update failed!", 
+	            		"Error", 
+	            		JOptionPane.WARNING_MESSAGE);
+			}
+		}
+	}
 }
 
 

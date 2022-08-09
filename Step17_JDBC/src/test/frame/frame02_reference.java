@@ -9,14 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class frame02 extends JFrame implements ActionListener{
+public class frame02_reference extends JFrame implements ActionListener{
    
    // 필드
    JButton sendBtn;
    JButton deleteBtn;
    
    // 생성자 (지역변수는 생성자 호출될때만 잠깐 살아있고 그 이후에는 사라짐)
-   public frame02(String title) {
+   public frame02_reference(String title) {
       // 부모생성자에 프레임의 제목 넘겨주기
       super(title);
       
@@ -46,7 +46,7 @@ public class frame02 extends JFrame implements ActionListener{
    
    public static void main(String[] args) {
       
-      JFrame f = new frame02("나의 프레임");
+      JFrame f = new frame02_reference("나의 프레임");
       f.setBounds(100, 100, 500, 500);
       f.setDefaultCloseOperation(EXIT_ON_CLOSE);
       f.setVisible(true);
